@@ -18,7 +18,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
-    "outDir": "docs",
+    "outDir": "dist",
     "paths": {
       "pages/*": ["src/pages/*"],
       "app/*": ["src/app/*"],
@@ -29,5 +29,5 @@
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "test", "docs", "docs/**/*spec.ts"]
+  "exclude": ["node_modules", "test", "dist", "dist/**/*spec.ts"]
 }
