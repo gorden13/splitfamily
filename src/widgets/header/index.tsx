@@ -2,10 +2,10 @@ import { Avatar, Box } from '@radix-ui/themes';
 import { ProgressBar } from 'shared/ui';
 import { useChatStore } from 'entities/chat';
 
-import './styles.scss';
-
 import Logo from './logo.svg?react';
 import User from './user.svg?react';
+
+import './styles.scss';
 
 export const Header = () => {
   const { progress } = useChatStore();
