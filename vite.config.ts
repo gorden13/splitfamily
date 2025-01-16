@@ -21,7 +21,4 @@ export default defineConfig({
       usePolling: true,
     },
   },
-  build: {
-    assetsDir: './docs/assets',
-  },
 });
