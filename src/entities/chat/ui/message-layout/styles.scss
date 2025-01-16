@@ -1,0 +1,6 @@
+.message-layout {
+  display: grid;
+  gap: var(--margin-l);
+  grid-template-columns: 24px minmax(min-content, 460px);
+  align-items: start;
+}

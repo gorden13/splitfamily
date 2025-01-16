@@ -1,0 +1,25 @@
+$header-bg-color: #fff;
+
+.header {
+  background-color: $header-bg-color;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: var(--header-height) var(--sub-header-height);
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--margin-l);
+  }
+
+  &__user-panel {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__progress {
+    grid-column: 1/3;
+  }
+}

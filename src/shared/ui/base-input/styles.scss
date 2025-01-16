@@ -1,0 +1,16 @@
+.input-wrapper {
+  height: 56px;
+  background-color: #fff;
+  padding: var(--margin-xl);
+  border-radius: var(--radius-l);
+
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    color: #344054;
+    background: #ffffff;
+  }
+}

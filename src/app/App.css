@@ -1,0 +1,4 @@
+.main-container {
+  display: grid;
+  grid-template-rows: 158px 1fr min-content;
+}

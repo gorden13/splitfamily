@@ -1,0 +1,9 @@
+.messages-list {
+  display: grid;
+  margin-top: var(--margin-xl);
+  gap: var(--margin-s);
+
+  .answer {
+    justify-self: end;
+  }
+}

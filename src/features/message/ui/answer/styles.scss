@@ -1,0 +1,10 @@
+.answer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--margin-l);
+  max-width: 400px;
+  word-break: break-all;
+  padding: var(--margin-m) var(--margin-l);
+  background-color: #fff;
+  border-radius: var(--radius-l);
+}

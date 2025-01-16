@@ -1,0 +1,141 @@
+---
+openapi: 3.1.0
+info:
+  title: FastAPI
+  version: 0.1.0
+paths:
+  '/chat/create':
+    post:
+      summary: Create
+      operationId: create_chat_create_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/Question'
+  '/chat/send-message':
+    post:
+      summary: Send Message
+      operationId: send_message_chat_send_message_post
+      parameters:
+        - name: sid
+          in: cookie
+          required: false
+          schema:
+            anyOf:
+              - type: string
+                format: uuid
+              - type: 'null'
+            title: Sid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              '$ref': '#/components/schemas/UserAnswer'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/AnswerMessage'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AnswerMessage:
+      properties:
+        question:
+          '$ref': '#/components/schemas/Question'
+        progress:
+          type: integer
+          title: Progress
+        document:
+          anyOf:
+            - '$ref': '#/components/schemas/Document'
+            - type: 'null'
+      type: object
+      required:
+        - question
+        - progress
+      title: AnswerMessage
+    Document:
+      properties:
+        uri:
+          type: string
+          title: Uri
+        filename:
+          type: string
+          title: Filename
+        filesize:
+          type: integer
+          title: Filesize
+      type: object
+      required:
+        - uri
+        - filename
+        - filesize
+      title: Document
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            '$ref': '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Question:
+      properties:
+        message_type:
+          type: string
+          title: Message Type
+        question_id:
+          type: string
+          title: Question Id
+        message_content:
+          type: string
+          title: Message Content
+      type: object
+      required:
+        - message_type
+        - question_id
+        - message_content
+      title: Question
+    UserAnswer:
+      properties:
+        user_answer:
+          type: string
+          title: User Answer
+      type: object
+      required:
+        - user_answer
+      title: UserAnswer
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
