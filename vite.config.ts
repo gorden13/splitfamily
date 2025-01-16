@@ -21,9 +21,5 @@ export default defineConfig({
       usePolling: true,
     },
   },
-  build: {
-    outDir: 'dist',
-    assetsDir: './',
-  },
-  base: './',
+  base: '/splitfamily',
 });
