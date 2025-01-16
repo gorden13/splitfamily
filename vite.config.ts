@@ -21,4 +21,10 @@ export default defineConfig({
       usePolling: true,
     },
   },
+  build: {
+    outDir: 'dist',
+    assetsDir: './',
+    // emitAssets: false,
+  },
+  base: './',
 });
