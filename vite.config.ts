@@ -24,7 +24,6 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: './',
-    // emitAssets: false,
   },
   base: './',
 });

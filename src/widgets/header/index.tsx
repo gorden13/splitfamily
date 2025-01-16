@@ -16,7 +16,7 @@ export const Header = () => {
         <div className="header__logo">
           <Logo />
 
-          <h3 className="header__title">AI поможет составить план развода+</h3>
+          <h3 className="header__title">AI поможет составить план развода</h3>
         </div>
 
         <div className="header__user-panel">
