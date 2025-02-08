@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import { IMessage, useChatStore } from 'entities/chat';
 import { MessageAnswer } from 'features/message';
 import { MessageQuestion } from 'features/message/ui/question';
@@ -8,6 +8,15 @@ import './styles.scss';
 
 export const MessagesList: FC = () => {
   const { messages, init } = useChatStore();
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   useOnMountUnsafe(() => {
     init();
@@ -41,6 +50,7 @@ export const MessagesList: FC = () => {
           {renderMessageComponent(item)}
         </React.Fragment>
       ))}
+      <div ref={messagesEndRef} />
     </div>
   );
 };

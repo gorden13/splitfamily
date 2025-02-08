@@ -3,7 +3,7 @@ import { useBetween } from 'use-between';
 import { delay } from 'shared/lib';
 import { HTTPValidationError } from 'shared/api/schema/Api';
 import { Answer } from '../model';
-import { IMessage } from '../types';
+import { IAnswer, IMessage } from '../types';
 import { chatAnswer, initChat } from '../api';
 
 const MAIN_ERROR_TEXT =
@@ -23,16 +23,26 @@ const useChatState = () => {
     setMessages((prev) => [...prev, message]);
   };
 
+  const getCurrentMessage = (): IMessage =>
+    messages.length ? messages[messages.length - 1] : ({} as IMessage);
+
   const getNewId = (): number => {
     return messages.length + 1;
   };
 
-  const getFastAnswers = (type: IMessage['type']): string[] => {
+  const getFastAnswers = (type: IMessage['type']): IAnswer[] => {
     switch (type) {
       case 'yes/no':
-        return ['Да', 'Нет'];
+        return [
+          { id: 1234, text: 'Да' },
+          { id: 1235, text: 'Нет' },
+        ];
       case 'yes/no/not_all':
-        return ['Да', 'Нет', 'Не все'];
+        return [
+          { id: 1236, text: 'Да' },
+          { id: 1237, text: 'Нет' },
+          { id: 1238, text: 'Не все' },
+        ];
       default:
         return [];
     }
@@ -43,7 +53,7 @@ const useChatState = () => {
     addMessage(answer);
 
     const currentMessage: IMessage = {
-      id: 1,
+      id: '',
       slug: 'question',
       type: 'yes/no',
       text: '',
@@ -61,6 +71,7 @@ const useChatState = () => {
       const result = await chatAnswer({ user_answer: text });
 
       if (currentMessage) {
+        currentMessage.id = result.data.question.question_id;
         currentMessage.text = result.data.question.message_content;
         currentMessage.internalId = result.data.question.question_id;
         currentMessage.type = result.data.question
@@ -103,7 +114,7 @@ const useChatState = () => {
 
   const init = async (): Promise<IMessage> => {
     const initialMessage: IMessage = {
-      id: 1,
+      id: 0,
       slug: 'question',
       type: 'yes/no',
       text: '',
@@ -116,6 +127,7 @@ const useChatState = () => {
     try {
       const response = await initChat();
 
+      initialMessage.id = response.data.question_id;
       initialMessage.type = response.data.message_type as IMessage['type'];
       initialMessage.text = response.data.message_content;
       initialMessage.internalId = response.data.question_id;
@@ -145,6 +157,7 @@ const useChatState = () => {
     clearMessages,
     progress,
     setProgress,
+    getCurrentMessage,
   };
 };
 

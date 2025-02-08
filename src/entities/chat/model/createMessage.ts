@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import type { IMessage } from '../types';
+import type { IAnswer, IMessage } from '../types';
 
 class Message implements IMessage {
   id: number;
@@ -14,7 +14,7 @@ class Message implements IMessage {
 
   isLoaded = true;
 
-  fastAnswers: string[] = [];
+  fastAnswers: IAnswer[] = [];
 
   progress: number = 0;
 

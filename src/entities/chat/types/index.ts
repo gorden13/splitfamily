@@ -12,14 +12,18 @@ type TMessageType =
 
 type TMessageSlug = 'question' | 'answer' | 'generate' | 'download';
 
-export interface IMessage {
+export interface IAnswer {
   id: number;
+  text: string;
+}
+export interface IMessage {
+  id: number | string;
   text: string;
   slug: TMessageSlug;
   type: TMessageType;
   description?: string;
   isLoaded: boolean;
   isError: boolean;
-  fastAnswers: string[];
+  fastAnswers: IAnswer[];
   internalId?: string;
 }
