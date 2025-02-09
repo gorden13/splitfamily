@@ -53,7 +53,7 @@ export const FastAnswerPanel: FC<FastAnswerPanelProps> = ({ fastAnswer }) => {
     return (
       <BaseInput
         value={text}
-        disabled={Boolean(!message?.isLoaded)}
+        disabled={Boolean(!message?.isLoaded || message.fastAnswers.length)}
         type="text"
         onChange={inputEvent}
       />

@@ -1,16 +1,19 @@
-.input-wrapper {
+input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #344054;
   height: 56px;
-  background-color: #fff;
   padding: 0 var(--margin-xl);
   border-radius: var(--radius-l);
+  background: #fff;
 
-  input {
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 400;
-    color: #344054;
-    background: #ffffff;
+  &:disabled {
+    background: #ececec;
+
+    &:hover {
+      cursor: default;
+    }
   }
 }

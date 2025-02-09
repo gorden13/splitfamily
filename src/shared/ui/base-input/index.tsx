@@ -1,4 +1,3 @@
-import { Flex } from '@radix-ui/themes';
 import type { ChangeEvent } from 'react';
 
 import './styles.scss';
@@ -19,14 +18,12 @@ export const BaseInput = ({
   disabled = false,
 }: InputProps) => {
   return (
-    <Flex align="center" className="input-wrapper">
-      <input
-        placeholder={placeholder}
-        value={value}
-        type={type}
-        disabled={disabled}
-        onChange={onChange}
-      />
-    </Flex>
+    <input
+      placeholder={placeholder}
+      value={value}
+      type={type}
+      disabled={disabled}
+      onChange={onChange}
+    />
   );
 };

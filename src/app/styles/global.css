@@ -110,3 +110,7 @@ button.rt-BaseButton {
   outline: none;
   cursor: pointer;
 }
+
+button.rt-BaseButton:disabled {
+  cursor: not-allowed;
+}
