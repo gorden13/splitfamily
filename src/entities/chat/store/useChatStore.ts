@@ -68,7 +68,7 @@ const useChatState = () => {
     await delay(1000);
 
     try {
-      const result = await chatAnswer({ user_answer: text });
+      const result = await chatAnswer();
 
       if (currentMessage) {
         currentMessage.id = result.data.question.question_id;
@@ -81,11 +81,8 @@ const useChatState = () => {
 
         setProgress(result.data.progress);
 
-        // if (currentMessage.type === 'not_expected') {
-        //   progress = 100;
-        // }
-
         if (currentMessage.type === 'ready_to_generate') {
+          setProgress(100);
           currentMessage.slug = 'generate';
         }
       }

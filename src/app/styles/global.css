@@ -45,7 +45,20 @@ main {
   background-color: var(--bg-body-color);
   overflow: auto;
   scroll-behavior: smooth;
-  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #d1d1d1;
+    border-radius: 4px;
+  }
 }
 
 h1 {

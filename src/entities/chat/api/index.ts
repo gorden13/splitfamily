@@ -3,7 +3,6 @@ import type {
   AnswerMessage,
   HttpResponse,
   Question,
-  UserAnswer,
   Document,
 } from 'shared/api/schema/Api';
 import { delay, getFakeResponse } from 'shared/lib';
@@ -84,14 +83,9 @@ export const initChat = async (): Promise<HttpResponse<Question>> => {
   }
 };
 
-export const chatAnswer = async (
-  data: UserAnswer
-): Promise<HttpResponse<AnswerMessage>> => {
+export const chatAnswer = async (): Promise<HttpResponse<AnswerMessage>> => {
   try {
     // return await client.chat.sendMessageChatSendMessagePost(data);
-
-    // eslint-disable-next-line no-console
-    console.log(data.user_answer);
 
     const question = questionsArray[questionCount];
     questionCount += 1;
