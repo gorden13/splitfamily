@@ -16,6 +16,9 @@
     "swagger-generate-init": "npx swagger-typescript-api -p ./splitfamily-swagger-generate.yml -o ./src/shared/api/schema/ && prettier --write src/shared/api/schema/"
   },
   "main": "./docs/index.html",
+  "files": [
+    "./report.pdf"
+  ],
   "dependencies": {
     "@radix-ui/themes": "^3.1.6",
     "date-fns": "^4.1.0",
