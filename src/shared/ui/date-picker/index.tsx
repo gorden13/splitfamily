@@ -1,8 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { ru } from 'date-fns/locale/ru';
 
 import './styles.scss';
+
+registerLocale('ru', ru);
 
 type DateValue = Date | null;
 
@@ -37,6 +41,7 @@ export const DatePickerShared: FC<DatePickerProps> = ({
       <DatePicker
         dateFormat="dd.MM.yyyy"
         className="date-picker"
+        locale="ru"
         popperPlacement="bottom-start"
         isClearable
         selected={startDate}

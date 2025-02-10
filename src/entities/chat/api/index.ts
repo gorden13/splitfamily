@@ -1,4 +1,4 @@
-import { client } from 'shared/api/client';
+// import { client } from 'shared/api/client';
 import type {
   AnswerMessage,
   HttpResponse,
@@ -106,7 +106,17 @@ export const chatAnswer = async (): Promise<HttpResponse<AnswerMessage>> => {
 
 export const generateReport = async (): Promise<HttpResponse<Document>> => {
   try {
-    return await client.chat.generateReport();
+    // return await client.chat.generateReport();
+
+    await delay(3000);
+
+    const result = getFakeResponse({
+      filename: 'report.pdf',
+      filesize: 43242,
+      uri: '/splitfamily/report.pdf',
+    });
+
+    return result;
   } catch (error) {
     return Promise.reject(error);
   }

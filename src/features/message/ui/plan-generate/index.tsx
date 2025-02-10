@@ -8,9 +8,13 @@ import './styles.scss';
 
 interface PlanGenerateProps {
   isLoading: boolean;
+  onGenerate: () => void;
 }
 
-export const PlanGenerate: FC<PlanGenerateProps> = ({ isLoading }) => {
+export const PlanGenerate: FC<PlanGenerateProps> = ({
+  isLoading,
+  onGenerate,
+}) => {
   return (
     <MessageLayout isLoading={isLoading} className="generate-plan">
       <div className="content">
@@ -18,7 +22,7 @@ export const PlanGenerate: FC<PlanGenerateProps> = ({ isLoading }) => {
           Спасибо, я собрал всю нужную информацию для составления плана развода.
         </p>
 
-        <Button variant="surface">
+        <Button variant="surface" onClick={onGenerate}>
           Сгенерировать план развода <Rocket />
         </Button>
       </div>

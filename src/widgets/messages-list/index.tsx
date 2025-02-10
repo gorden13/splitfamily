@@ -1,19 +1,29 @@
 import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import { IMessage, useChatStore } from 'entities/chat';
-import { MessageAnswer, PlanGenerate } from 'features/message';
+import { MessageAnswer, PlanGenerate, PlanLoad } from 'features/message';
 import { MessageQuestion } from 'features/message/ui/question';
 import { useOnMountUnsafe } from 'shared/hooks';
 
 import './styles.scss';
 
 export const MessagesList: FC = () => {
-  const { messages, init, addQuestion } = useChatStore();
+  const { messages, init, addQuestion, planGenerate, report } = useChatStore();
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({
       behavior: 'smooth',
     });
+  };
+
+  const generatePlan = async () => {
+    await planGenerate();
+  };
+
+  const downloadPlan = () => {
+    const { uri } = report;
+
+    window.open(uri, '_blank');
   };
 
   useEffect(() => {
@@ -36,7 +46,11 @@ export const MessagesList: FC = () => {
     }
 
     if (slug === 'generate') {
-      return <PlanGenerate isLoading={!isLoaded} />;
+      return <PlanGenerate isLoading={!isLoaded} onGenerate={generatePlan} />;
+    }
+
+    if (slug === 'download') {
+      return <PlanLoad isLoading={!isLoaded} onLoad={downloadPlan} />;
     }
 
     return (

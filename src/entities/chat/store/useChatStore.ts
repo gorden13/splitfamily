@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useBetween } from 'use-between';
 import { delay } from 'shared/lib';
 import { HTTPValidationError } from 'shared/api/schema/Api';
-import { Answer } from '../model';
+import { Answer, Question } from '../model';
 import { IAnswer, IMessage } from '../types';
-import { chatAnswer, initChat } from '../api';
+import { chatAnswer, generateReport, initChat } from '../api';
 
 const MAIN_ERROR_TEXT =
   'Что-то пошло не так, не удаётся получить ответ. Попробуйте еще раз.';
@@ -12,6 +12,11 @@ const MAIN_ERROR_TEXT =
 const useChatState = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [progress, setProgress] = useState(0);
+  const [report, setReport] = useState({
+    filename: '',
+    filesize: 0,
+    uri: '',
+  });
 
   const outputErrorMessage = (error: unknown): void => {
     const errorObject = error as HTTPValidationError;
@@ -82,7 +87,7 @@ const useChatState = () => {
         setProgress(result.data.progress);
 
         if (currentMessage.type === 'ready_to_generate') {
-          setProgress(100);
+          setProgress(85);
           currentMessage.slug = 'generate';
         }
       }
@@ -146,6 +151,34 @@ const useChatState = () => {
     }
   };
 
+  const planGenerate = async () => {
+    const newId = getNewId();
+
+    const question = new Question(newId);
+    addMessage(question);
+
+    try {
+      const result = await generateReport();
+      question.type = 'widget/download';
+      question.slug = 'download';
+
+      setReport({
+        filename: result.data.filename,
+        filesize: result.data.filesize,
+        uri: result.data.uri,
+      });
+
+      setProgress(100);
+    } catch (error) {
+      question.isError = true;
+      question.text = MAIN_ERROR_TEXT;
+
+      outputErrorMessage(error);
+    } finally {
+      question.isLoaded = true;
+    }
+  };
+
   return {
     init,
     messages,
@@ -155,6 +188,8 @@ const useChatState = () => {
     progress,
     setProgress,
     getCurrentMessage,
+    planGenerate,
+    report,
   };
 };
 
